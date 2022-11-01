@@ -1,0 +1,8 @@
+plugins {
+    id 'com.android.library'
+    id 'gymster.feature-module'
+}
+
+android {
+    namespace 'com.maruchin.core.ui'
+}

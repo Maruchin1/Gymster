@@ -12,6 +12,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - uses: gradle/gradle-build-action@v2
+      - name: 'Kotlin Unit Tests'
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
+      - name: 'Android Unit Tests'
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: testDebugUnitTest
