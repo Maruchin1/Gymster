@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="finish_training">Finish training</string>
+    <string name="finish_training_explanation">Your progress will be saved. You can back to it later.</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="good_job_all_completed">Good job! All completed</string>
+</resources>

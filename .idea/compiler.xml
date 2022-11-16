@@ -3,6 +3,11 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="Gymster.core.androidutils" target="11" />
+      <module name="Gymster.feature.activetraining" target="11" />
+      <module name="Gymster.feature.plandetails" target="11" />
+      <module name="Gymster.feature.planslist" target="11" />
+      <module name="Gymster.ui.plandetails" target="11" />
+      <module name="Gymster.ui.planslist" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="set">Set</string>
+    <string name="weight_unit">kg</string>
+    <string name="reps">reps</string>
+    <string name="complete_set">Complete set</string>
+</resources>

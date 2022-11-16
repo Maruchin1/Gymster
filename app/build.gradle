@@ -24,9 +24,15 @@ android {
 }
 
 dependencies {
-    implementation project(':feature:planslist')
-    implementation project(':feature:plandetails')
-
+    // UI
+    implementation project(':ui:training')
+    implementation project(':ui:home')
+    implementation project(':ui:set')
+    // Repository
+    implementation project(':repository:plan')
+    implementation project(':repository:training')
+    implementation project(':repository:user')
+    // Core
     implementation project(':core:utils')
     implementation project(':core:ui')
 }

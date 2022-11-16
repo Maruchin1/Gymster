@@ -1,0 +1,9 @@
+plugins {
+    id 'gymster.kotlin-module'
+}
+
+dependencies {
+    implementation project(':core:utils')
+    implementation project(':model:plan')
+    implementation project(':model:user')
+}

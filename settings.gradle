@@ -14,11 +14,18 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Gymster"
 include ':app'
-// Feature
-include ':feature:planslist'
-include ':feature:plandetails'
-// Data
-include ':data:trainingplan'
+// Ui
+include ':ui:training'
+include ':ui:home'
+// Model
+include ':model:plan'
+include ':model:training'
+include ':model:user'
+// Repository
+include ':repository:training'
+include ':repository:plan'
+include ':repository:user'
 // Core
 include ':core:utils'
 include ':core:ui'
+include ':ui:set'

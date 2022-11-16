@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'gymster.feature-module'
+}
+
+android {
+    namespace 'com.maruchin.ui.home'
+}
+
+dependencies {
+    implementation project(':model:training')
+    implementation project(':model:plan')
+    implementation project(':core:utils')
+    implementation project(':core:ui')
+}
