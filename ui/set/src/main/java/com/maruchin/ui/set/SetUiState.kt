@@ -14,17 +14,17 @@ internal data class SetUiState(
     val repsAngleRange: IntRange = repsRangeToAngleRange(REPS_RANGE),
 ) {
     constructor(training: Training, previousTraining: Training?) : this(
-        setNumber = training.activeSet?.id ?: "",
+        setNumber = training.activeSet?.number ?: "",
         exerciseName = training.activeExercise?.name ?: "",
         numOfSets = training.activeExercise?.numOfSets?.toString() ?: "",
         repsRange = training.activeExercise?.repsRange?.let { formatRepsRange(it) } ?: "",
         weightAngle = when (training.activeSet?.completed) {
             true -> training.activeSet?.weight ?: 0f
-            else -> previousTraining?.getPreviousSet(training)?.weight ?: 0f
+            else -> previousTraining?.getSet(training)?.weight ?: 0f
         }.let(::weightToAngle),
         repsAngle = when (training.activeSet?.completed) {
             true -> training.activeSet?.reps ?: 0
-            else -> previousTraining?.getPreviousSet(training)?.reps ?: 0
+            else -> previousTraining?.getSet(training)?.reps ?: 0
         }.let(::repsToAngle),
     )
 

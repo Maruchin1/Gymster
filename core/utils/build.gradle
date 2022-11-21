@@ -1,3 +1,3 @@
 plugins {
-    id 'gymster.kotlin-module'
+    id 'gymster.model'
 }

@@ -1,10 +1,10 @@
 package com.maruchin.model.plan
 
 import com.maruchin.core.utils.Entity
-import com.maruchin.core.utils.generateId
+import com.maruchin.core.utils.Id
 
-data class PlanDay(
-    override val id: String = generateId(),
+data class PlanTraining(
+    override val id: Id = Id.generate(),
     val name: String,
     val exercises: List<PlanExercise>,
 ) : Entity

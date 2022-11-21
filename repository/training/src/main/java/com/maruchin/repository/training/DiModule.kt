@@ -11,5 +11,5 @@ import dagger.hilt.components.SingletonComponent
 internal interface DiModule {
 
     @Binds
-    fun repository(impl: MemoryTrainingRepository): TrainingRepository
+    fun repository(impl: TrainingRepositoryImpl): TrainingRepository
 }

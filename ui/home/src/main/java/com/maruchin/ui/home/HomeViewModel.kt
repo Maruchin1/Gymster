@@ -2,6 +2,7 @@ package com.maruchin.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.maruchin.core.utils.Id
 import com.maruchin.model.plan.PlanUseCase
 import com.maruchin.model.training.TrainingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +35,7 @@ internal class HomeViewModel @Inject constructor(
         trainingUseCase.startNewWeek()
     }
 
-    fun startTraining(trainingId: String) = viewModelScope.launch {
-        trainingUseCase.setActiveTraining(trainingId)
+    fun startTraining(trainingId: Id) = viewModelScope.launch {
+        trainingUseCase.activateTraining(trainingId)
     }
 }

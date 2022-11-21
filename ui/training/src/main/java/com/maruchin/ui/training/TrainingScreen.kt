@@ -11,24 +11,22 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.maruchin.core.ui.*
-import com.maruchin.model.plan.samplePlans
-import com.maruchin.model.training.sampleTrainings
+import com.maruchin.core.utils.Id
 
 @Composable
 internal fun TrainingScreen(
     state: TrainingUiState,
     onPreviousExercise: () -> Unit,
     onNextExercise: () -> Unit,
-    onSelectExercise: (id: String) -> Unit,
+    onSelectExercise: (Id) -> Unit,
     onFinishTraining: () -> Unit,
-    onEditSet: (id: String) -> Unit,
+    onEditSet: (Id) -> Unit,
 ) {
     val pagerState = rememberPagerState(state.currentPosition)
     val confirmCompleteDialogState = rememberDialogState()
@@ -98,7 +96,7 @@ internal fun TrainingScreen(
 private fun ExercisesPagerMediator(
     pagerState: PagerState,
     state: TrainingUiState,
-    onChangeExercise: (id: String) -> Unit
+    onChangeExercise: (Id) -> Unit
 ) {
     val uiPosition = pagerState.currentPage
     val modelPosition = state.currentPosition
@@ -116,20 +114,5 @@ private fun ExercisesPagerMediator(
             isScrolling = true
             pagerState.animateScrollToPage(modelPosition)
         }
-    }
-}
-
-@Preview
-@Composable
-private fun Preview() {
-    GymsterTheme {
-        TrainingScreen(
-            state = TrainingUiState(samplePlans[0], sampleTrainings[0]),
-            onPreviousExercise = {},
-            onNextExercise = {},
-            onSelectExercise = {},
-            onFinishTraining = {},
-            onEditSet = { }
-        )
     }
 }

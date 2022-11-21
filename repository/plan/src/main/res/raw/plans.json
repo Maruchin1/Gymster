@@ -1,0 +1,200 @@
+[
+  {
+    "id": "1",
+    "name": "Push Pull",
+    "trainings": [
+      {
+        "id": "1",
+        "name": "Push Strength",
+        "exercises": [
+          {
+            "id": "1",
+            "name": "Barbell press on a horizontal bench",
+            "numOfSets": 3,
+            "minReps": 4,
+            "maxReps": 6
+          },
+          {
+            "id": "2",
+            "name": "Dumbbell press on an incline bench",
+            "numOfSets": 3,
+            "minReps": 6,
+            "maxReps": 8
+          },
+          {
+            "id": "3",
+            "name": "Dumbbell fly",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "4",
+            "name": "Straightening on the lift with one hand",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "5",
+            "name": "Sideways rises on a one-handed lift",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "6",
+            "name": "Squat with a dumbbell",
+            "numOfSets": 2,
+            "minReps": 10,
+            "maxReps": 12
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Pull Strength",
+        "exercises": [
+          {
+            "id": "1",
+            "name": "Rowing a barbell with an overgrip",
+            "numOfSets": 3,
+            "minReps": 4,
+            "maxReps": 6
+          },
+          {
+            "id": "2",
+            "name": "Pulling the bar on the lift",
+            "numOfSets": 3,
+            "minReps": 6,
+            "maxReps": 8
+          },
+          {
+            "id": "3",
+            "name": "One-handed rowing on the lift",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "4",
+            "name": "Romanian dumbbell deadlift",
+            "numOfSets": 2,
+            "minReps": 10,
+            "maxReps": 12
+          },
+          {
+            "id": "5",
+            "name": "Dumbbell bending while standing",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "6",
+            "name": "Reverse flaps on the gate",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Push Hyper",
+        "exercises": [
+          {
+            "id": "1",
+            "name": "Barbell press on a horizontal bench",
+            "numOfSets": 3,
+            "minReps": 8,
+            "maxReps": 10
+          },
+          {
+            "id": "2",
+            "name": "Dumbbell press on an incline bench",
+            "numOfSets": 3,
+            "minReps": 10,
+            "maxReps": 12
+          },
+          {
+            "id": "3",
+            "name": "Dumbbell fly",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "4",
+            "name": "Straightening on the lift with one hand",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "5",
+            "name": "Sideways rises on a one-handed lift",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "6",
+            "name": "Squat with a dumbbell",
+            "numOfSets": 2,
+            "minReps": 10,
+            "maxReps": 12
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "name": "Pull Hyper",
+        "exercises": [
+          {
+            "id": "1",
+            "name": "Rowing a barbell with an overgrip",
+            "numOfSets": 3,
+            "minReps": 8,
+            "maxReps": 10
+          },
+          {
+            "id": "2",
+            "name": "Pulling the bar on the lift",
+            "numOfSets": 3,
+            "minReps": 10,
+            "maxReps": 12
+          },
+          {
+            "id": "3",
+            "name": "One-handed rowing on the lift",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "4",
+            "name": "Romanian dumbbell deadlift",
+            "numOfSets": 2,
+            "minReps": 10,
+            "maxReps": 12
+          },
+          {
+            "id": "5",
+            "name": "Dumbbell bending while standing",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          },
+          {
+            "id": "6",
+            "name": "Reverse flaps on the gate",
+            "numOfSets": 3,
+            "minReps": 12,
+            "maxReps": 15
+          }
+        ]
+      }
+    ]
+  }
+]

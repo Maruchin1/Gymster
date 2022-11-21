@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.maruchin.core.ui.GymsterCard
+import com.maruchin.core.utils.Id
 
 @Composable
-internal fun DayView(state: DayUiState, onOpenTraining: (String) -> Unit) {
+internal fun TrainingView(state: TrainingUiState, onOpenTraining: (Id) -> Unit) {
     GymsterCard(
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
@@ -26,7 +27,7 @@ internal fun DayView(state: DayUiState, onOpenTraining: (String) -> Unit) {
                     .padding(start = 16.dp, end = 8.dp),
             ) {
                 Text(
-                    text = state.dayName,
+                    text = state.trainingName,
                     style = typography.subtitle2,
                     modifier = Modifier.padding(vertical = 20.dp)
                 )

@@ -1,8 +1,11 @@
 package com.maruchin.model.user
 
+import com.maruchin.core.utils.Id
+
 val sampleUser = User(
-    username = "Marcin",
+    id = Id("1"),
+    username = "John Doe",
     preferences = UserPreferences(
-        activePlanId = "1",
+        activePlanId = Id("1")
     )
 )

@@ -9,9 +9,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.maruchin.core.utils.Id
 
 @Composable
-internal fun WeekPage(state: WeekUiState, onOpenTraining: (String) -> Unit) {
+internal fun WeekPage(state: WeekUiState, onOpenTraining: (Id) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -19,7 +20,7 @@ internal fun WeekPage(state: WeekUiState, onOpenTraining: (String) -> Unit) {
     ) {
         Spacer(modifier = Modifier.height(12.dp))
         state.days.forEach { day ->
-            DayView(state = day, onOpenTraining = onOpenTraining)
+            TrainingView(state = day, onOpenTraining = onOpenTraining)
         }
     }
 }

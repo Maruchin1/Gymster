@@ -2,6 +2,7 @@ package com.maruchin.ui.training
 
 import com.maruchin.core.ui.formatRepsRange
 import com.maruchin.core.ui.formatWeight
+import com.maruchin.core.utils.Id
 import com.maruchin.core.utils.findEntity
 import com.maruchin.model.plan.Plan
 import com.maruchin.model.training.TrainingExercise
@@ -9,7 +10,7 @@ import com.maruchin.model.training.Training
 import com.maruchin.model.training.TrainingSet
 
 data class TrainingUiState(
-    val trainingId: String = "",
+    val trainingId: Id = Id.empty,
     val planName: String = "",
     val planDayName: String = "",
     val exercises: List<ExerciseUiState> = emptyList(),
@@ -20,7 +21,7 @@ data class TrainingUiState(
     constructor(plan: Plan, training: Training) : this(
         trainingId = training.id,
         planName = plan.name,
-        planDayName = plan.days.findEntity(training.planDayId)?.name ?: "",
+        planDayName = plan.trainings.findEntity(training.planTrainingId)?.name ?: "",
         exercises = training.exercises.map { ExerciseUiState(training, it) },
         currentPosition = training.activeExercisePosition,
         canGoPrevious = training.canGoPrevious,
@@ -29,16 +30,18 @@ data class TrainingUiState(
 }
 
 data class ExerciseUiState(
-    val id: String,
-    val name: String = "",
-    val numOfSeries: String = "",
-    val repsRange: String = "",
-    val sets: List<SetUiState> = emptyList(),
-    val completed: Boolean = false,
-    val active: Boolean = false,
+    val id: Id,
+    val number: String,
+    val name: String,
+    val numOfSeries: String,
+    val repsRange: String,
+    val sets: List<SetUiState>,
+    val completed: Boolean,
+    val active: Boolean,
 ) {
     constructor(training: Training, exercise: TrainingExercise) : this(
         id = exercise.id,
+        number = exercise.number,
         name = exercise.name,
         numOfSeries = exercise.numOfSets.toString(),
         repsRange = formatRepsRange(exercise.repsRange),
@@ -49,12 +52,14 @@ data class ExerciseUiState(
 }
 
 data class SetUiState(
-    val id: String,
+    val id: Id,
+    val number: String,
     val reps: String,
     val weight: String,
 ) {
     constructor(trainingSet: TrainingSet) : this(
         id = trainingSet.id,
+        number = trainingSet.number,
         reps = when {
             trainingSet.completed -> trainingSet.reps.toString()
             else -> "--"

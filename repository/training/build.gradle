@@ -1,5 +1,9 @@
 plugins {
-    id 'gymster.kotlin-module'
+    id 'gymster.repository'
+}
+
+android {
+    namespace 'com.maruchin.repository.training'
 }
 
 dependencies {

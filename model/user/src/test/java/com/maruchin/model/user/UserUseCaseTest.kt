@@ -1,5 +1,6 @@
 package com.maruchin.model.user
 
+import com.maruchin.core.utils.Id
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -17,15 +18,14 @@ class UserUseCaseTest {
     @Test
     fun `Select plan`() = runTest {
         // Given
-        val user = spyk(sampleUser)
-        every { userRepository.getLogged() } returns flowOf(user)
-        coJustRun { userRepository.saveLogged(any()) }
+        val updatedUser = sampleUser.selectPlan(Id("1"))
+        every { userRepository.getLogged() } returns flowOf(sampleUser)
+        coJustRun { userRepository.saveLogged(updatedUser) }
 
         // When
-        userUseCase.selectPlan("p2")
+        userUseCase.selectPlan(Id("1"))
 
         // Then
-        coVerify { user.selectPlan("p2") }
-        coVerify { userRepository.saveLogged(any()) }
+        coVerify { userRepository.saveLogged(updatedUser) }
     }
 }

@@ -5,116 +5,114 @@ import kotlin.test.*
 class TrainingTest {
 
     @Test
-    fun `Started training`() {
+    fun `Begin training`() {
         // When
-        val training = sampleTrainings[0]
+        val training = samplePushTraining.begin()
 
         // Then
         training.run {
             assertTrue(canGoNext)
             assertFalse(canGoPrevious)
-            assertEquals(training.exercises[0], activeExercise)
-            assertEquals(training.exercises[0].sets[0], activeSet)
+            assertEquals(exercises.first(), activeExercise)
+            assertNull(activeSet)
         }
     }
 
     @Test
-    fun `Move forward`() {
+    fun `Get set`() {
+        // Given
+        val activeTraining = sampleNextPushTraining
+            .begin()
+            .activateSet(sampleNextPushTraining.exercises.first().sets.first().id)
+
         // When
-        val training = sampleTrainings[0]
-            .goToNextExercise()
-            .goToNextExercise()
+        val set = samplePushTraining
+            .begin()
+            .getSet(activeTraining)
 
         // Then
-        training.run {
-            assertTrue(canGoNext)
-            assertTrue(canGoPrevious)
-            assertEquals(training.exercises[2], activeExercise)
-            assertEquals(training.exercises[2].sets[0], activeSet)
-        }
-    }
-
-    @Test
-    fun `Move forward and backward`() {
-        // When
-        val training = sampleTrainings[0]
-            .goToNextExercise()
-            .goToNextExercise()
-            .goToPreviousExercise()
-
-        // Then
-        training.run {
-            assertTrue(canGoNext)
-            assertTrue(canGoPrevious)
-            assertEquals(training.exercises[1], activeExercise)
-            assertEquals(training.exercises[1].sets[0], activeSet)
-        }
-    }
-
-    @Test
-    fun `Activate specific exercise`() {
-        // When
-        val training = sampleTrainings[0]
-            .activateExercise(sampleTrainings[0].exercises[3].id)
-
-        // Then
-        training.run {
-            assertTrue(canGoNext)
-            assertTrue(canGoPrevious)
-            assertEquals(training.exercises[3], activeExercise)
-            assertEquals(training.exercises[3].sets[0], activeSet)
-        }
-    }
-
-    @Test
-    fun `Activate last exercise`() {
-        // When
-        val training = sampleTrainings[0]
-            .activateExercise(sampleTrainings[0].exercises[5].id)
-
-        // Then
-        training.run {
-            assertFalse(canGoNext)
-            assertTrue(canGoPrevious)
-            assertEquals(training.exercises[5], activeExercise)
-            assertEquals(training.exercises[5].sets[0], activeSet)
-        }
+        assertEquals(samplePushTraining.exercises.first().sets.first(), set)
     }
 
     @Test
     fun `Activate set`() {
         // When
-        val training = sampleTrainings[0]
-            .activateSet(sampleTrainings[0].exercises[0].sets[1].id)
+        val training = samplePushTraining
+            .begin()
+            .activateSet(samplePushTraining.exercises.first().sets[1].id)
 
         // Then
         training.run {
-            assertEquals(training.exercises[0].sets[1], activeSet)
+            assertEquals(training.exercises.first().sets[1], activeSet)
         }
     }
 
     @Test
     fun `Complete active set`() {
         // When
-        val training = sampleTrainings[0]
+        val training = samplePushTraining
+            .begin()
+            .activateSet(samplePushTraining.exercises.first().sets[1].id)
             .completeActiveSet(weight = 60f, reps = 8)
 
         // Then
         training.run {
-            assertEquals(TrainingSet(id = "1", weight = 60f, reps = 8), activeSet)
+            assertNull(activeSet)
+            exercises.first().sets[1].run {
+                assertEquals(60f, weight)
+                assertEquals(8, reps)
+            }
         }
     }
 
     @Test
-    fun `Get last set`() {
+    fun `Move forward`() {
         // When
-        val training = sampleTrainings[2]
-            .goToNextExercise()
-            .activateSet(sampleTrainings[2].exercises[1].sets[1].id)
-        val lastSet = sampleTrainings[0]
-            .getPreviousSet(training)
+        val training = samplePushTraining
+            .begin()
+            .activateSet(samplePushTraining.exercises.first().sets.first().id)
+            .goNext()
 
         // Then
-        assertEquals(sampleTrainings[0].exercises[1].sets[1], lastSet)
+        training.run {
+            assertFalse(canGoNext)
+            assertTrue(canGoPrevious)
+            assertEquals(exercises.last(), activeExercise)
+            assertNull(activeSet)
+        }
+    }
+
+    @Test
+    fun `Move forward and backward`() {
+        // When
+        val training = samplePushTraining
+            .begin()
+            .goNext()
+            .activateSet(samplePushTraining.exercises.last().sets.first().id)
+            .goPrevious()
+
+        // Then
+        training.run {
+            assertTrue(canGoNext)
+            assertFalse(canGoPrevious)
+            assertEquals(exercises.first(), activeExercise)
+            assertNull(activeSet)
+        }
+    }
+
+    @Test
+    fun `Activate specific exercise`() {
+        // When
+        val training = samplePushTraining
+            .begin()
+            .activateExercise(samplePushTraining.exercises.last().id)
+
+        // Then
+        training.run {
+            assertFalse(canGoNext)
+            assertTrue(canGoPrevious)
+            assertEquals(exercises.last(), activeExercise)
+            assertNull(activeSet)
+        }
     }
 }

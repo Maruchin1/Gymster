@@ -1,6 +1,5 @@
 plugins {
-    id 'com.android.library'
-    id 'gymster.feature-module'
+    id 'gymster.ui'
 }
 
 android {

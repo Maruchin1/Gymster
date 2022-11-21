@@ -13,11 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.maruchin.core.ui.divider
+import com.maruchin.core.utils.Id
 
 @Composable
 internal fun TrainingProgressView(
     exercises: List<ExerciseUiState>,
-    onSelectExercise: (String) -> Unit,
+    onSelectExercise: (Id) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -27,7 +28,7 @@ internal fun TrainingProgressView(
     ) {
         exercises.forEach { state ->
             ProgressItem(
-                exerciseNumber = state.id,
+                exerciseNumber = state.number,
                 completed = state.completed,
                 active = state.active,
                 onSelect = { onSelectExercise(state.id) }

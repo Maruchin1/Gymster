@@ -14,9 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.maruchin.core.ui.GymsterCard
+import com.maruchin.core.utils.Id
 
 @Composable
-internal fun SetsListView(sets: List<SetUiState>, onEditSet: (id: String) -> Unit) {
+internal fun SetsListView(sets: List<SetUiState>, onEditSet: (Id) -> Unit) {
     GymsterCard(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 12.dp)
@@ -48,7 +49,7 @@ private fun SetView(state: SetUiState, onEditSet: () -> Unit) {
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
-        Text(text = "Set ${state.id}.")
+        Text(text = "Set ${state.number}.")
         Spacer(modifier = Modifier.weight(1f))
         Row {
             Text(

@@ -1,6 +1,7 @@
 package com.maruchin.model.user
 
 import com.maruchin.core.utils.DefaultDispatcher
+import com.maruchin.core.utils.Id
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -11,17 +12,9 @@ class UserUseCase @Inject constructor(
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun selectPlan(planId: String) = withContext(dispatcher) {
-        withLoggedUser {
-            selectPlan(planId)
-        }
-    }
-
-    private suspend fun withLoggedUser(reduce: User.() -> User) {
-        userRepository
-            .getLogged()
-            .first()
-            .let(reduce)
+    suspend fun selectPlan(planId: Id) = withContext(dispatcher) {
+        userRepository.getLogged().first()
+            .selectPlan(planId)
             .let { userRepository.saveLogged(it) }
     }
 }

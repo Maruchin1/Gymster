@@ -1,6 +1,7 @@
 package com.maruchin.model.training
 
 import com.maruchin.core.utils.DefaultDispatcher
+import com.maruchin.core.utils.Id
 import com.maruchin.model.plan.PlanRepository
 import com.maruchin.model.user.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +22,9 @@ class TrainingUseCase @Inject internal constructor(
             .getLogged()
             .map { it.preferences.activePlanId }
             .flatMapLatest { trainingRepository.getByPlan(it) }
-            .map { list -> list.sortedWith(compareBy({ it.weekNumber }, { it.planDayId })) }
+            .map { list ->
+                list.sortedWith(compareBy({ it.weekNumber }, { it.planTrainingId.value }))
+            }
 
     fun getActiveTraining(): Flow<Training?> =
         trainingRepository.getActive()
@@ -36,40 +39,45 @@ class TrainingUseCase @Inject internal constructor(
             val trainingHistory = trainingRepository.getByPlan(plan.id).first()
             val newTrainingWeek = trainingFactory.createNewWeek(plan, trainingHistory)
             newTrainingWeek.forEach { training ->
-                trainingRepository.save(training)
+                trainingRepository.add(training)
             }
         }
     }
 
-    suspend fun setActiveTraining(trainingId: String) = withContext(dispatcher) {
+    suspend fun activateTraining(trainingId: Id) = withContext(dispatcher) {
         trainingRepository.setActive(trainingId)
+        trainingRepository.getActive().first()
+            ?.begin()
+            ?.let { trainingRepository.update(it) }
     }
 
-    suspend fun setActiveExercise(exerciseId: String) = withContext(dispatcher) {
-        withActiveTraining { activateExercise(exerciseId) }
-    }
-
-    suspend fun setActiveSet(setId: String) = withContext(dispatcher) {
-        withActiveTraining { activateSet(setId) }
-    }
-
-    suspend fun goToNextExercise() = withContext(dispatcher) {
-        withActiveTraining { goToNextExercise() }
-    }
-
-    suspend fun goToPreviousExercise() = withContext(dispatcher) {
-        withActiveTraining { goToPreviousExercise() }
+    suspend fun activateSet(setId: Id) = withContext(dispatcher) {
+        trainingRepository.getActive().first()
+            ?.activateSet(setId)
+            ?.let { trainingRepository.update(it) }
     }
 
     suspend fun completeActiveSet(weight: Float, reps: Int) = withContext(dispatcher) {
-        withActiveTraining { completeActiveSet(weight, reps) }
+        trainingRepository.getActive().first()
+            ?.completeActiveSet(weight, reps)
+            ?.let { trainingRepository.update(it) }
     }
 
-    private suspend fun withActiveTraining(action: Training.() -> Training) {
-        trainingRepository
-            .getActive()
-            .first()
-            ?.let(action)
-            ?.let { trainingRepository.save(it) }
+    suspend fun activateExercise(exerciseId: Id) = withContext(dispatcher) {
+        trainingRepository.getActive().first()
+            ?.activateExercise(exerciseId)
+            ?.let { trainingRepository.update(it) }
+    }
+
+    suspend fun goNext() = withContext(dispatcher) {
+        trainingRepository.getActive().first()
+            ?.goNext()
+            ?.let { trainingRepository.update(it) }
+    }
+
+    suspend fun goPrevious() = withContext(dispatcher) {
+        trainingRepository.getActive().first()
+            ?.goPrevious()
+            ?.let { trainingRepository.update(it) }
     }
 }

@@ -1,5 +1,6 @@
 package com.maruchin.ui.home
 
+import com.maruchin.core.utils.Id
 import com.maruchin.model.plan.Plan
 import com.maruchin.model.training.Training
 import com.maruchin.model.training.TrainingExercise
@@ -23,22 +24,22 @@ internal data class HomeUiState(
 
 internal data class WeekUiState(
     val weekNumber: Int,
-    val days: List<DayUiState>,
+    val days: List<TrainingUiState>,
 ) {
     constructor(plan: Plan, trainings: Collection<Training>) : this(
         weekNumber = trainings.first().weekNumber,
-        days = trainings.map { DayUiState(plan, it) }
+        days = trainings.map { TrainingUiState(plan, it) }
     )
 }
 
-internal data class DayUiState(
-    val trainingId: String,
-    val dayName: String,
+internal data class TrainingUiState(
+    val trainingId: Id,
+    val trainingName: String,
     val exercises: List<ExerciseUiState>,
 ) {
     constructor(plan: Plan, training: Training) : this(
         trainingId = training.id,
-        dayName = plan.getDay(training.planDayId).name,
+        trainingName = plan.getTraining(training.planTrainingId)?.name ?: "",
         exercises = training.exercises.map { ExerciseUiState(it) }
     )
 }

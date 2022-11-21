@@ -16,7 +16,7 @@ internal class SetViewModel @Inject constructor(
     val uiState: StateFlow<SetUiState> =
         combine(
             trainingUseCase.getActiveTraining().filterNotNull(),
-            trainingUseCase.getPreviousTraining().filterNotNull(),
+            trainingUseCase.getPreviousTraining(),
         ) { training, previousSet ->
             SetUiState(training, previousSet)
         }.stateIn(

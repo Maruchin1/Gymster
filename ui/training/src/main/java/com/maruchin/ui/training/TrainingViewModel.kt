@@ -2,6 +2,7 @@ package com.maruchin.ui.training
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.maruchin.core.utils.Id
 import com.maruchin.model.plan.PlanUseCase
 import com.maruchin.model.training.TrainingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,18 +29,18 @@ internal class TrainingViewModel @Inject constructor(
         )
 
     fun goToNextExercise() = viewModelScope.launch {
-        trainingUseCase.goToNextExercise()
+        trainingUseCase.goNext()
     }
 
     fun goToPreviousExercise() = viewModelScope.launch {
-        trainingUseCase.goToPreviousExercise()
+        trainingUseCase.goPrevious()
     }
 
-    fun goToExercise(exerciseId: String) = viewModelScope.launch {
-        trainingUseCase.setActiveExercise(exerciseId)
+    fun goToExercise(exerciseId: Id) = viewModelScope.launch {
+        trainingUseCase.activateExercise(exerciseId)
     }
 
-    fun editSet(setId: String) = viewModelScope.launch {
-        trainingUseCase.setActiveSet(setId)
+    fun editSet(setId: Id) = viewModelScope.launch {
+        trainingUseCase.activateSet(setId)
     }
 }

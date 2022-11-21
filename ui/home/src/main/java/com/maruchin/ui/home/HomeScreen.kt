@@ -7,18 +7,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.*
-import com.maruchin.core.ui.GymsterTheme
-import com.maruchin.model.plan.samplePlans
-import com.maruchin.model.training.sampleTrainings
+import com.maruchin.core.utils.Id
 
 @Composable
 internal fun HomeScreen(
     state: HomeUiState,
     onStartNewWeek: () -> Unit,
     onOpenUserProfile: () -> Unit,
-    onStartTraining: (trainingId: String) -> Unit
+    onStartTraining: (Id) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -45,21 +42,5 @@ internal fun HomeScreen(
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun Preview() {
-    GymsterTheme {
-        HomeScreen(
-            state = HomeUiState(
-                plan = samplePlans.first(),
-                trainings = sampleTrainings,
-            ),
-            onStartNewWeek = {},
-            onOpenUserProfile = {},
-            onStartTraining = {}
-        )
     }
 }

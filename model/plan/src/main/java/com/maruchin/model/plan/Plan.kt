@@ -3,11 +3,11 @@ package com.maruchin.model.plan
 import com.maruchin.core.utils.*
 
 data class Plan(
-    override val id: String = generateId(),
+    override val id: Id = Id.generate(),
     val name: String,
-    val days: List<PlanDay>,
+    val trainings: List<PlanTraining>,
 ) : Entity {
 
-    fun getDay(id: String): PlanDay =
-        days.findEntity(id).let(::checkNotNull)
+    fun getTraining(id: Id): PlanTraining? =
+        trainings.findEntity(id)
 }

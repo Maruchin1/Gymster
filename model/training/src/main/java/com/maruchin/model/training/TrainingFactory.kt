@@ -7,13 +7,13 @@ import javax.inject.Inject
 internal class TrainingFactory @Inject constructor() {
 
     fun createNewWeek(plan: Plan, trainingHistory: List<Training>): List<Training> =
-        plan.days.map { day ->
+        plan.trainings.map { day ->
             val trainingExercises = day.exercises
                 .mapIndexed { index, planExercise -> createExercise(index, planExercise) }
-                .sortedBy { it.id }
+                .sortedBy { it.number }
             Training(
                 planId = plan.id,
-                planDayId = day.id,
+                planTrainingId = day.id,
                 weekNumber = getNextWeekNumber(trainingHistory),
                 exercises = trainingExercises,
                 activeExerciseId = trainingExercises.first().id,
@@ -22,15 +22,19 @@ internal class TrainingFactory @Inject constructor() {
         }
 
     private fun getNextWeekNumber(trainingHistory: List<Training>): Int =
-        trainingHistory.maxOf { it.weekNumber } + 1
+        (trainingHistory.maxOfOrNull { it.weekNumber } ?: 0) + 1
 
     private fun createExercise(index: Int, exercise: PlanExercise) = TrainingExercise(
-        id = (index + 1).toString(),
+        number = (index + 1).toString(),
         name = exercise.name,
         numOfSets = exercise.numOfSets,
         repsRange = exercise.repsRange,
         sets = (1..exercise.numOfSets).map { setNumber ->
-            TrainingSet(setNumber.toString())
+            createSet(setNumber)
         }
+    )
+
+    private fun createSet(setNumber: Int) = TrainingSet(
+        number = setNumber.toString(),
     )
 }

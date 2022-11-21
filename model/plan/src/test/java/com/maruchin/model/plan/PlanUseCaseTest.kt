@@ -23,13 +23,13 @@ class PlanUseCaseTest {
         // Given
         every { userRepository.getLogged() } returns flowOf(sampleUser)
         every { planRepository.getById(sampleUser.preferences.activePlanId) } returns
-            flowOf(samplePlans[0])
+            flowOf(samplePushPullPlan)
 
         // When
         planUseCase.getActivePlan().test {
 
             // Then
-            assertEquals(samplePlans[0], awaitItem())
+            assertEquals(samplePushPullPlan, awaitItem())
             awaitComplete()
         }
     }

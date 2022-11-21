@@ -1,5 +1,6 @@
 package com.maruchin.model.user
 
+import com.maruchin.core.utils.Id
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -8,9 +9,9 @@ class UserTest {
     @Test
     fun `Select plan`() {
         // When
-        val user = sampleUser.selectPlan("p2")
+        val user = sampleUser.selectPlan(Id("1"))
 
         // Then
-        assertEquals("p2", user.preferences.activePlanId)
+        assertEquals(Id("1"), user.preferences.activePlanId)
     }
 }

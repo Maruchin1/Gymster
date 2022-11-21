@@ -11,5 +11,5 @@ import dagger.Module
 internal interface DiModule {
 
     @Binds
-    fun repository(impl: MemoryPlanRepository): PlanRepository
+    fun repository(impl: CachingPlanRepository): PlanRepository
 }
